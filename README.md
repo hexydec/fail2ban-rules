@@ -2,7 +2,9 @@
 Useful fail2ban rules for detecting and banning malicious web traffic using Nginx access logs in combined format.
 
 ## Usage
-The filters are placed in [src/filter.d/](src/filter.d/), copy these files into your fail2ban configuration folder, and then setup the required jails to use them. Jail configuration is not provided here to allow you to configure them as needed.
+The filters are placed in [src/filter.d/](src/filter.d/), copy these files into your fail2ban configuration folder, and then setup the required jails to use them.
+
+[Example jail configuration is provided](src/jail.conf), *note this is Plesk specific and will require tweaking to your setup*.
 
 ## Filters
 Here is a list of the filter provided:
