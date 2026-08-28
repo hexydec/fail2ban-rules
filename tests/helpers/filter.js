@@ -83,11 +83,13 @@ export function parseFilter(name) {
  * @return {string} The pattern with any (?i:...) group expanded
  */
 function expandCaseInsensitive(pattern) {
-	return pattern.replace(/\(\?i:([^)]*)\)/g, (all, content) => {
-		if (/[^\w|-]/.test(content)) {
-			throw new Error(`Cannot expand (?i:...) containing regex syntax, only literal alternations are supported: ${all}`);
+	// the group may contain nested parentheses, e.g. java(?=\/), so allow one level of them
+	return pattern.replace(/\(\?i:((?:[^()\\]|\\.|\((?:[^()\\]|\\.)*\))*)\)/g, (all, content) => {
+		if (/[[\]]/.test(content)) {
+			throw new Error(`Cannot expand (?i:...) containing a character class, as [a-z] would be corrupted: ${all}`);
 		}
-		return "(?:" + content.replace(/[a-z]/gi, c => `[${c.toUpperCase()}${c.toLowerCase()}]`) + ")";
+		// expand literal letters only, never the letter of an escape such as \d or \w
+		return "(?:" + content.replace(/(\\.)|([a-z])/gi, (m, esc, ch) => esc ?? `[${ch.toUpperCase()}${ch.toLowerCase()}]`) + ")";
 	});
 }
 
