@@ -1,0 +1,15 @@
+{
+	"name": "fail2ban-rules",
+	"version": "1.0.0",
+	"description": "Useful fail2ban rules for detecting and banning malicious web traffic using Nginx access logs in combined format",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"scripts": {
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"devDependencies": {
+		"vitest": "^3.2.4"
+	}
+}
