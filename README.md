@@ -24,6 +24,9 @@ Captures requests with `POST`, `PUT`, or `DELETE` methods, use this to limit the
 ### [nginx-excessive-reqs.conf](src/filter.d/nginx-excessive-reqs.conf)
 Match excessive requests logged by nginx rate limiting from your error log to ban those IP's. 
 
+### [nginx-exploit.conf](src/filter.d/nginx-exploit.conf)
+Block URL's containing characters and patterns that clearly indicate an exploit attempt.
+
 ### [nginx-limit-reqs.conf](src/filter.d/nginx-limit-reqs.conf)
 Captures requests that returned a `429` status, to ban IP's that keep going over your configured rate limit. 
 
