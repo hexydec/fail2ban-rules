@@ -63,7 +63,6 @@ describe("nginx-404", () => {
 			"/fonts/inter.otf",
 			"/css/theme.css",
 			"/js/app.js",
-			"/js/app.js.map",
 			"/site.webmanifest",
 			"/docs/terms.pdf"
 		];
@@ -178,8 +177,9 @@ describe("nginx-404", () => {
 		expectMatch(filter, '1.2.3.4 - - [28/Aug/2026:10:00:00 +0000] "GET " 404 1234 "-" "-"');
 	});
 
-	// These are all covered by the txt, xml and json extensions rather than being named individually,
-	// which is why the naming variants below need no special handling
+	// These are all covered by the txt and xml extensions rather than being named individually, which
+	// is why the naming variants below need no special handling. json is not excluded by extension, so
+	// the one file browsers genuinely request is named
 	describe("ignores well known files that browsers and crawlers request", () => {
 		const paths = [
 			"/robots.txt",
@@ -198,7 +198,6 @@ describe("nginx-404", () => {
 			"/AutoDiscover/AutoDiscover.xml",
 			"/Autodiscover/Autodiscover.xml",
 			"/manifest.json",
-			"/static/manifest.json",
 			"/robots.txt?v=2"
 		];
 		for (const path of paths) {
@@ -208,8 +207,8 @@ describe("nginx-404", () => {
 		}
 	});
 
-	// Because txt, xml and json are excluded wholesale, single probes for these files are not counted
-	// here. That is deliberate: this filter is a volume heuristic, and a scanner spraying paths trips
+	// Because txt and xml are excluded wholesale, single probes for these files are not counted here.
+	// That is deliberate: this filter is a volume heuristic, and a scanner spraying paths trips
 	// maxretry on the rest of its requests. Targeted probes for named files are nginx-badreqs' job
 	describe("does not count text format probes, which nginx-badreqs covers", () => {
 		const paths = [
@@ -220,7 +219,19 @@ describe("nginx-404", () => {
 			"/.env.txt",
 			"/wlwmanifest.xml",
 			"/wp-includes/wlwmanifest.xml",
-			"/phpunit.xml",
+			"/phpunit.xml"
+		];
+		for (const path of paths) {
+			it(path, () => {
+				expectNoMatch(filter, accessLog({path, status: 404}));
+			});
+		}
+	});
+
+	// json holds credentials and build manifests far more often than it holds anything a browser asks
+	// for, and a source map hands over the unminified application, so neither gets a pass by extension
+	describe("counts json and source map probes", () => {
+		const paths = [
 			"/composer.json",
 			"/package.json",
 			"/package-lock.json",
@@ -231,11 +242,14 @@ describe("nginx-404", () => {
 			"/tsconfig.json",
 			"/data/config.json",
 			"/data/site.config.json",
-			"/.vscode/sftp.json"
+			"/.vscode/sftp.json",
+			"/static/manifest.json",
+			"/asset-manifest.json",
+			"/js/app.js.map"
 		];
 		for (const path of paths) {
 			it(path, () => {
-				expectNoMatch(filter, accessLog({path, status: 404}));
+				expectMatch(filter, accessLog({path, status: 404}));
 			});
 		}
 	});

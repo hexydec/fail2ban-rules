@@ -1,0 +1,10 @@
+# requests refused by nginx rate limiting, which returns 429 by default
+203.0.113.10 - - [28/Aug/2026:10:00:01 +0000] "GET /busy HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.11 - - [28/Aug/2026:10:00:02 +0000] "POST /api/v1/search HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.12 - - [28/Aug/2026:10:00:03 +0000] "GET /img/logo.png HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.13 - - [28/Aug/2026:10:00:04 +0000] "HEAD / HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.14 - - [28/Aug/2026:10:00:05 +0000] "PATCH /api/v1/items/9 HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.15 - - [28/Aug/2026:10:00:06 +0000] "GET /" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.16 - - [28/Aug/2026:10:00:07 +0000] "GET " 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2001:db8::1 - - [28/Aug/2026:10:00:07 +0000] "GET / HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.17 - - [28/Aug/2026:10:00:08 +0000] "GET / HTTP/1.1" 429 1234 "-" "-"

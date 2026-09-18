@@ -1,0 +1,17 @@
+# the other errors nginx writes to the same log
+2026/08/28 10:00:01 [error] 1234#0: *5678 open() "/var/www/example.com/missing.html" failed (2: No such file or directory), client: 198.51.100.10, server: example.com, request: "GET /missing.html HTTP/1.1", host: "example.com"
+2026/08/28 10:00:02 [error] 1234#0: *5678 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 198.51.100.11, server: example.com, request: "GET /slow HTTP/1.1", host: "example.com"
+2026/08/28 10:00:03 [error] 1234#0: *5678 connect() failed (111: Connection refused) while connecting to upstream, client: 198.51.100.12, server: example.com, request: "GET /api HTTP/1.1", host: "example.com"
+2026/08/28 10:00:04 [warn] 1234#0: *5678 a client request body is buffered to a temporary file /var/lib/nginx/body/0000000001, client: 198.51.100.13, server: example.com, request: "POST /upload HTTP/1.1", host: "example.com"
+2026/08/28 10:00:05 [crit] 1234#0: *5678 SSL_do_handshake() failed (SSL: error:0A00006C:SSL routines::bad key share), client: 198.51.100.14, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:30:00 [notice] 1234#0: signal process started
+
+# a burst inside the configured delay is only slowed down, not refused, so it is not a ban
+2026/08/28 10:00:06 [error] 1234#0: *5678 delaying request, excess: 0.508 by zone "one", client: 198.51.100.15, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:07 [error] 1234#0: *5678 delaying request, excess: 1.200 by zone "api", client: 198.51.100.16, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# the pattern expects the worker thread id nginx logs when it is not built with threads
+2026/08/28 10:00:08 [error] 1234#1: *5678 limiting requests, excess: 0.700 by zone "one", client: 198.51.100.17, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# an access log line, in case a jail is ever pointed at the wrong file
+198.51.100.18 - - [28/Aug/2026:10:31:00 +0000] "GET /busy HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

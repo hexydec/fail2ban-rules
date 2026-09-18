@@ -2,9 +2,88 @@ import {describe, it, expect} from "vitest";
 import {expectMatch, expectNoMatch, capturedHost, parseFilter} from "./helpers/filter.js";
 import {accessLog} from "./helpers/log.js";
 
+/**
+ * Expands an alternation into every literal string it matches
+ *
+ * The keyword list is written with optional groups and classes, e.g. config(?:uration)?, ba?k and
+ * log[io]n, so the words have to be generated rather than read off, to be sure each one is covered
+ *
+ * @param {string} source The contents of an alternation, without its enclosing brackets
+ * @return {Array} Every string the alternation matches
+ */
+function expandAlternation(source) {
+	let index = 0;
+
+	const parseAtom = () => {
+			let pieces;
+			if (source.startsWith("(?:", index)) {
+				index += 3;
+				pieces = parseAlternation();
+				index++; // step over the closing bracket
+			} else if (source[index] === "[") {
+				const close = source.indexOf("]", index);
+				pieces = source.slice(index + 1, close).split("");
+				index = close + 1;
+			} else if (source[index] === "\\") {
+				pieces = [source[index + 1]];
+				index += 2;
+			} else {
+				pieces = [source[index]];
+				index++;
+			}
+			if (source[index] === "?") {
+				index++;
+				pieces = ["", ...pieces];
+			}
+			return pieces;
+		},
+		parseSequence = () => {
+			let results = [""];
+			while (index < source.length && source[index] !== "|" && source[index] !== ")") {
+				const pieces = parseAtom();
+				results = results.flatMap(prefix => pieces.map(piece => prefix + piece));
+			}
+			return results;
+		},
+		parseAlternation = () => {
+			const options = parseSequence();
+			while (source[index] === "|") {
+				index++;
+				options.push(...parseSequence());
+			}
+			return options;
+		};
+
+	return parseAlternation();
+}
+
+/**
+ * Reads the keyword list out of the filter
+ *
+ * @param {string} pattern The failregex as written in the filter
+ * @return {Array} Every keyword the filter counts as a probe
+ */
+function readKeywords(pattern) {
+	// the keyword alternation is the only (?i:...) group in the pattern, and it holds nested groups,
+	// so its closing bracket has to be found by counting rather than by matching the first one
+	const start = pattern.indexOf("(?i:") + 4;
+	let depth = 0,
+			end = start;
+	while (depth > -1 && end < pattern.length) {
+		if (pattern[end] === "\\") {
+			end++;
+		} else if (pattern[end] === "(") {
+			depth++;
+		} else if (pattern[end] === ")") {
+			depth--;
+		}
+		end++;
+	}
+	return expandAlternation(pattern.slice(start, end - 1));
+}
+
 const filter = "nginx-badreqs",
-		// the keyword alternation is the only group in the pattern with a large number of members
-		keywords = parseFilter(filter).failregex[0].match(/\(\?i?:([a-z0-9_|-]{200,})\)/)[1].split("|");
+		keywords = readKeywords(parseFilter(filter).failregex[0]);
 
 describe("nginx-badreqs", () => {
 
@@ -36,7 +115,7 @@ describe("nginx-badreqs", () => {
 			"/config.old",
 			"/laravel/.env",
 			"/docker-compose.yml",
-			"/.vscode/sftp.json",
+			"/.vscode/sftp.yml",
 			"/swagger/index.html"
 		];
 		for (const path of paths) {
@@ -84,7 +163,11 @@ describe("nginx-badreqs", () => {
 			"/contact",
 			"/products/widget-9000",
 			"/favicon.ico",
-			"/img/logo.png"
+			"/img/logo.png",
+			"/new-products",
+			"/home-page",
+			"/site-map",
+			"/blog/2026/08/a-post-that-moved"
 		];
 		for (const path of paths) {
 			it(path, () => {
@@ -99,16 +182,10 @@ describe("nginx-badreqs", () => {
 	// containing one is caught too. Pinned so that any future narrowing of the list shows up here
 	describe("also matches everyday paths built from keywords in the list", () => {
 		const paths = [
-			"/main.css",
 			"/user-guide",
-			"/new-products",
-			"/home-page",
 			"/info.html",
-			"/site-map",
 			"/test-drive",
-			"/app.js",
-			"/local-news",
-			"/blog/2026/08/a-post-that-moved"
+			"/local-news"
 		];
 		for (const path of paths) {
 			it(path, () => {
@@ -148,7 +225,7 @@ describe("nginx-badreqs", () => {
 					`/${keyword}`,
 					`/${keyword}.php`,
 					`/${keyword}/`,
-					`/wp-content/${keyword}.txt`,
+					`/wp-content/${keyword}.bak`,
 					`/a-${keyword}_b`,
 					`/x/${keyword}/y`,
 					// the alternation is wrapped in (?i:), because scanners routinely use capitals
@@ -167,14 +244,14 @@ describe("nginx-badreqs", () => {
 	// requested by stale links and crawlers will accumulate hits. Pinned so the exposure is visible
 	describe("case insensitivity extends matching to capitalised routes", () => {
 		describe("counts these on a 404", () => {
-			for (const path of ["/Home/Index", "/Home/About", "/Account/Login", "/Manage/Index", "/User/Profile", "/Blog/My-Post", "/CHANGELOG.txt", "/Gemfile", "/.DS_Store", "/WP-ADMIN/setup-config.php"]) {
+			for (const path of ["/Home/Index", "/Account/Login", "/Account/Register", "/Manage/Index", "/User/Profile", "/Gemfile", "/.DS_Store", "/WP-ADMIN/setup-config.php"]) {
 				it(path, () => {
 					expectMatch(filter, accessLog({path, status: 404}));
 				});
 			}
 		});
 		describe("still ignores these on a 404", () => {
-			for (const path of ["/Account/Register", "/Products/Widget", "/Contact-Us", "/About-Us", "/News/2026/Summer", "/Sitemap.xml", "/Basket", "/Checkout", "/Downloads/Brochure.pdf"]) {
+			for (const path of ["/Products/Widget", "/Contact-Us", "/About-Us", "/Home/About", "/Blog/My-Post", "/News/2026/Summer", "/Sitemap.xml", "/Basket", "/Checkout", "/Downloads/Brochure.pdf"]) {
 				it(path, () => {
 					expectNoMatch(filter, accessLog({path, status: 404}));
 				});
@@ -189,7 +266,7 @@ describe("nginx-badreqs", () => {
 		});
 	});
 
-	// Everyday keywords such as app, site, post and index fire on legitimate well known files, which
+	// Everyday keywords such as app, manifest and index fire on legitimate well known files, which
 	// have no extension based exclusion here as they do in nginx-404, so they are named. All of these
 	// were seen 404ing from verified crawler IP ranges in real logs
 	describe("ignores legitimate well known files", () => {
@@ -220,25 +297,25 @@ describe("nginx-badreqs", () => {
 
 	// The exclusion is anchored to the whole filename, so a probe that appends to one is still counted
 	describe("still counts probes that only start with a well known filename", () => {
-		// note /sitemap.xml.php is not covered, but not because of the exclusion: no keyword matches it,
-		// as "site" cannot sit on a boundary inside "sitemap". Pre-existing, listed here for clarity
-		for (const path of ["/apple-app-site-association.php", "/manifest.json.bak", "/site.webmanifest.php"]) {
+		// note /sitemap.xml.php and /site.webmanifest.php are not covered, but not because of the
+		// exclusion: no keyword matches either. Pre-existing, listed here for clarity
+		for (const path of ["/apple-app-site-association.php", "/manifest.json.bak", "/ads.txt.bak"]) {
 			it(path, () => {
 				expectMatch(filter, accessLog({path, status: 404}));
 			});
 		}
 	});
 
-	// Probe families found in real logs that nginx-404 cannot see, because they end in .png, .gif or
-	// .js and are excluded there by extension
-	describe("catches CMS probe families hidden behind static extensions", () => {
+	// Probe families found in real logs that nginx-404 cannot see, because they have no extension or
+	// one that is not on the shared ignore list. The members of each family that end in .png, .gif or
+	// .js are ignored here too, so a scanner is only caught on the rest of its run
+	describe("catches CMS probe families that are not hidden behind a static extension", () => {
 		const paths = [
-			"/zb_users/avatar/0.png",
-			"/zb_users/plugin/UEditor/themes/default/images/cursor_v.gif",
-			"/member/templets/images/icon1.gif",
-			"/theme/metron/js/metron.js",
+			"/zb_users/upload/shell.php",
+			"/member/templets/default/index.htm",
 			"/ueditor/net/controller.ashx",
-			"/include/ueditor/php/controller.php"
+			"/include/ueditor/php/controller.php",
+			"/theme/metron/config.inc"
 		];
 		for (const path of paths) {
 			it(path, () => {

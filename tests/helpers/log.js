@@ -4,6 +4,7 @@ export const browserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK
 
 const accessDefaults = {
 		ip: "1.2.3.4",
+		user: "-", // $remote_user, which basic auth fills in and an anonymous request leaves as a dash
 		method: "GET",
 		path: "/",
 		protocol: "HTTP/1.1",
@@ -28,7 +29,7 @@ const accessDefaults = {
 /**
  * Builds an nginx access log line in combined format
  *
- * @param {Object} options Any of ip, method, path, protocol, status, bytes, referer, agent, date
+ * @param {Object} options Any of ip, user, method, path, protocol, status, bytes, referer, agent, date
  * @return {string} A log line
  */
 export function accessLog(options = {}) {
@@ -36,7 +37,7 @@ export function accessLog(options = {}) {
 	// which an empty protocol reproduces
 	const config = {...accessDefaults, ...options},
 			request = config.protocol === "" ? `${config.method} ${config.path}` : `${config.method} ${config.path} ${config.protocol}`;
-	return `${config.ip} - - [${config.date}] "${request}" ${config.status} ${config.bytes} "${config.referer}" "${config.agent}"`;
+	return `${config.ip} - ${config.user} [${config.date}] "${request}" ${config.status} ${config.bytes} "${config.referer}" "${config.agent}"`;
 }
 
 /**

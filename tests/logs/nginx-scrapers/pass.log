@@ -1,0 +1,65 @@
+# the browsers real visitors arrive in
+198.51.100.10 - - [28/Aug/2026:10:00:01 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.11 - - [28/Aug/2026:10:00:02 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15"
+198.51.100.12 - - [28/Aug/2026:10:00:03 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0"
+198.51.100.13 - - [28/Aug/2026:10:00:04 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1"
+198.51.100.14 - - [28/Aug/2026:10:00:05 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+198.51.100.15 - - [28/Aug/2026:10:00:06 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.2210.91"
+198.51.100.16 - - [28/Aug/2026:10:00:07 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"
+198.51.100.17 - - [28/Aug/2026:10:00:08 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0"
+198.51.100.18 - - [28/Aug/2026:10:00:09 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Ubuntu/22.04 Firefox/115.0"
+
+# the crawlers a site wants to be indexed by
+198.51.100.19 - - [28/Aug/2026:10:00:10 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+198.51.100.20 - - [28/Aug/2026:10:00:11 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"
+198.51.100.21 - - [28/Aug/2026:10:00:12 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (compatible; DuckDuckBot/1.1; +http://duckduckgo.com/duckduckbot.html)"
+198.51.100.22 - - [28/Aug/2026:10:00:13 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"
+198.51.100.23 - - [28/Aug/2026:10:00:14 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)"
+198.51.100.24 - - [28/Aug/2026:10:00:15 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+198.51.100.25 - - [28/Aug/2026:10:00:16 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Twitterbot/1.0"
+198.51.100.26 - - [28/Aug/2026:10:00:17 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "LinkedInBot/1.0"
+198.51.100.27 - - [28/Aug/2026:10:00:18 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)"
+198.51.100.28 - - [28/Aug/2026:10:00:19 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (compatible; PinterestBot/1.0; +https://www.pinterest.com/bot.html)"
+
+# a product token that carries the rest of a real user agent is not the bare token
+198.51.100.29 - - [28/Aug/2026:10:00:20 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (X11; Linux x86_64)"
+198.51.100.30 - - [28/Aug/2026:10:00:21 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+198.51.100.31 - - [28/Aug/2026:10:00:22 +0000] "GET /prices HTTP/1.1" 200 1234 "-" "Mozilla/4.0 (compatible)"
+
+# the two paths a scraper is given a free pass on, as a browser extension fetches them itself
+198.51.100.32 - - [28/Aug/2026:10:00:23 +0000] "GET /favicon.ico HTTP/1.1" 200 1234 "-" "-"
+198.51.100.33 - - [28/Aug/2026:10:00:24 +0000] "GET /favicon.ico HTTP/1.1" 200 1234 "-" "curl/8.5.0"
+198.51.100.34 - - [28/Aug/2026:10:00:25 +0000] "GET /manifest.json HTTP/1.1" 200 1234 "-" "-"
+198.51.100.35 - - [28/Aug/2026:10:00:26 +0000] "GET /manifest.json HTTP/1.1" 200 1234 "-" "python-requests/2.31.0"
+
+# only the user agent is read, not the referer or the path
+198.51.100.36 - - [28/Aug/2026:10:00:27 +0000] "GET /curl/8.5.0 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.37 - - [28/Aug/2026:10:00:28 +0000] "GET /prices HTTP/1.1" 200 1234 "https://example.com/?ua=curl/8.5.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# real traffic these filters have to leave alone, taken from the same logs
+192.0.2.10 - - [08/Sep/2026:08:40:38 +0000] "GET /assets/pages/admin/op/disp.php?filedata=cGhwaW5mbygp HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.11 - - [08/Sep/2026:08:40:30 +0000] "GET /partners/admin/inc/archbatch.php?lng=../../../../../../../../boot.ini%00 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.12 - - [20/Jul/2025:10:23:17 +0000] "GET /news/new-intimate-image-abuse-laws-come-into-effect-across-england-and-wales/ HTTP/1.1" 301 162 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36"
+192.0.2.13 - - [08/Sep/2026:08:40:38 +0000] "GET /assets/pages/include/init.inc.php?G_PATH=n0nex1st HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.14 - - [03/Mar/2017:09:18:24 +0000] "GET //blog/services/multimedia/?cookiesettings= HTTP/1.1" 200 3821 "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.7; https://example.com/)"
+192.0.2.15 - - [27/Mar/2024:09:17:19 +0000] "GET /?q=wolfs&type=image&action=check HTTP/2.0" 200 49 "https://example.com/?q=wolfs&type=image" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+192.0.2.16 - - [27/Mar/2024:10:06:37 +0000] "GET /?q=powerline&type=web&pl=ext-chrome HTTP/1.1" 200 2126 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+192.0.2.17 - - [30/Mar/2025:08:50:17 +0100] "GET /assets/boxes/batteries-4.jpg HTTP/2.0" 200 10466 "https://example.com/topics/social-media/how-can-social-media-affect-body-image/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+192.0.2.18 - - [19/Jul/2025:16:00:09 +0000] "GET /google-cloud.zip HTTP/1.1" 301 162 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+192.0.2.19 - - [03/Mar/2017:09:20:27 +0000] "GET //cornwall-culture-project/portfolio/?page=4 HTTP/1.1" 200 4047 "-" "Mozilla/5.0 (compatible; MJ12bot/v1.4.7; https://example.com/)"
+192.0.2.20 - - [08/Sep/2026:08:40:53 +0000] "GET /check-case-status/foswiki/bin/view HTTP/1.0" 301 0 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.21 - - [08/Sep/2026:08:40:53 +0000] "GET /faq/bb_lib/checkdb.inc.php?libpath=n0nex1st/ HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.22 - - [30/Mar/2025:11:35:13 +0100] "GET /assets/documents/whisper-mobile.png HTTP/2.0" 200 157381 "https://example.com/online-safety/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Safari/605.1.15"
+192.0.2.23 - - [30/Mar/2025:06:40:38 +0100] "GET /assets/articles/parliament-5-medium.jpg HTTP/2.0" 200 0 "https://example.com/magazine/virtual-realities-everything-you-need-to-know-about-vr-gaming/" "Mozilla/5.0 (Linux; Android 13; TECNO KJ6 Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.40 Mobile Safari/537.36"
+192.0.2.24 - - [27/Mar/2024:09:45:34 +0000] "GET /?q=Guericke&type=web&action=check HTTP/1.1" 200 64 "https://example.com/?q=Guericke&type=web" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15"
+192.0.2.25 - - [03/Aug/2025:09:04:49 +0000] "GET /wp-content/themes/twentytwentyfour/templates/ HTTP/1.1" 301 162 "-" "fasthttp"
+192.0.2.26 - - [30/Mar/2025:12:41:27 +0100] "GET /magazine/kik-and-the-rise-of-the-porn-bots/ HTTP/2.0" 200 6036 "-" "Mozilla/5.0 (compatible; Bytespider; spider-feedback@bytedance.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.0.0 Safari/537.36"
+192.0.2.27 - - [08/Sep/2026:08:39:21 +0000] "GET /about-us/follow.php?forum_id=1&thread=abc HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.28 - - [27/Mar/2024:08:32:04 +0000] "GET /?q=aventine+keyhole&type=image&action=check HTTP/2.0" 200 64 "https://example.com/?q=aventine%20keyhole&type=image" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0"
+192.0.2.29 - - [27/Mar/2024:09:20:52 +0000] "GET /?q=eaGLE&type=image&action=check HTTP/2.0" 200 54 "https://example.com/?q=eaGLE&type=image" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+
+# authenticated with basic auth, so a generic agent is a person's own tooling rather than a scraper
+192.0.2.30 - will [28/Aug/2026:10:05:01 +0000] "GET /api/export HTTP/1.1" 200 8412 "-" "curl/8.5.0"
+192.0.2.31 - deploy-bot [28/Aug/2026:10:05:02 +0000] "POST /api/hooks HTTP/1.1" 200 12 "-" "python-requests/2.31.0"
+192.0.2.32 - a.user [28/Aug/2026:10:05:03 +0000] "GET /reports/weekly.csv HTTP/1.1" 200 44219 "-" "Wget/1.21.4"
+192.0.2.33 - monitor [28/Aug/2026:10:05:04 +0000] "HEAD /health HTTP/1.1" 200 0 "-" "-"

@@ -66,9 +66,23 @@ export function parseFilter(name) {
 			}
 		}
 	}
+	// fail2ban reads the file with python's configparser, where %(key)s interpolates another value
+	// from the same section and %% is the escape for a literal %, both resolved as the value is read
+	const resolve = patterns => patterns.map(pattern => {
+		let resolved = pattern;
+		while (/%\([\w.-]+\)s/.test(resolved)) {
+			resolved = resolved.replace(/%\(([\w.-]+)\)s/g, (all, key) => {
+				if (definition[key] === undefined) {
+					throw new Error(`Filter "${name}" interpolates ${all}, which it does not declare`);
+				}
+				return definition[key][0];
+			});
+		}
+		return resolved.replaceAll("%%", "%");
+	});
 	return {
-		failregex: definition.failregex ?? [],
-		ignoreregex: definition.ignoreregex ?? []
+		failregex: resolve(definition.failregex ?? []),
+		ignoreregex: resolve(definition.ignoreregex ?? [])
 	};
 }
 
@@ -83,14 +97,38 @@ export function parseFilter(name) {
  * @return {string} The pattern with any (?i:...) group expanded
  */
 function expandCaseInsensitive(pattern) {
-	// the group may contain nested parentheses, e.g. java(?=\/), so allow one level of them
-	return pattern.replace(/\(\?i:((?:[^()\\]|\\.|\((?:[^()\\]|\\.)*\))*)\)/g, (all, content) => {
-		if (/[[\]]/.test(content)) {
-			throw new Error(`Cannot expand (?i:...) containing a character class, as [a-z] would be corrupted: ${all}`);
+	let expanded = pattern,
+			start = expanded.indexOf("(?i:");
+	while (start > -1) {
+		// the group nests to any depth, e.g. (?:compress\.(?:bzip2|zlib)|php):\/\/, so its closing
+		// bracket has to be found by counting rather than by matching the first one
+		let depth = 0,
+				end = start + 4;
+		while (depth > -1 && end < expanded.length) {
+			if (expanded[end] === "\\") {
+				end++;
+			} else if (expanded[end] === "(") {
+				depth++;
+			} else if (expanded[end] === ")") {
+				depth--;
+			}
+			end++;
 		}
-		// expand literal letters only, never the letter of an escape such as \d or \w
-		return "(?:" + content.replace(/(\\.)|([a-z])/gi, (m, esc, ch) => esc ?? `[${ch.toUpperCase()}${ch.toLowerCase()}]`) + ")";
-	});
+		// a character class folds in place, as [a-z] cannot be rewritten as a pair of classes
+		const folded = expanded.slice(start + 4, end - 1).replace(/(\[\^?\]?(?:[^\]\\]|\\.)*\])|(\\.)|([a-z])/gi, (m, cls, esc, ch) => {
+			let out = esc ?? `[${ch?.toUpperCase()}${ch?.toLowerCase()}]`;
+			if (cls !== undefined) {
+				out = cls.replace(/(\\.)|([a-z])-([a-z])|([a-z])/gi, (c, cesc, from, to, letter) => cesc
+					?? (letter !== undefined
+						? `${letter.toUpperCase()}${letter.toLowerCase()}`
+						: `${from.toUpperCase()}-${to.toUpperCase()}${from.toLowerCase()}-${to.toLowerCase()}`));
+			}
+			return out;
+		});
+		expanded = `${expanded.slice(0, start)}(?:${folded})${expanded.slice(end)}`;
+		start = expanded.indexOf("(?i:", start);
+	}
+	return expanded;
 }
 
 /**

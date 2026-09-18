@@ -1,0 +1,19 @@
+# every other status, including the neighbouring 4xx codes
+198.51.100.10 - - [28/Aug/2026:10:00:01 +0000] "GET /busy HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.11 - - [28/Aug/2026:10:00:02 +0000] "GET /busy HTTP/1.1" 201 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.12 - - [28/Aug/2026:10:00:03 +0000] "GET /busy HTTP/1.1" 301 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.13 - - [28/Aug/2026:10:00:04 +0000] "GET /busy HTTP/1.1" 302 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.14 - - [28/Aug/2026:10:00:05 +0000] "GET /busy HTTP/1.1" 400 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.15 - - [28/Aug/2026:10:00:06 +0000] "GET /busy HTTP/1.1" 401 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.16 - - [28/Aug/2026:10:00:07 +0000] "GET /busy HTTP/1.1" 403 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.17 - - [28/Aug/2026:10:00:08 +0000] "GET /busy HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.18 - - [28/Aug/2026:10:00:09 +0000] "GET /busy HTTP/1.1" 428 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.19 - - [28/Aug/2026:10:00:10 +0000] "GET /busy HTTP/1.1" 431 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.20 - - [28/Aug/2026:10:00:11 +0000] "GET /busy HTTP/1.1" 500 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.21 - - [28/Aug/2026:10:00:12 +0000] "GET /busy HTTP/1.1" 503 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# 429 has to be the status field, not a byte count, a path or a referer
+198.51.100.22 - - [28/Aug/2026:10:00:13 +0000] "GET /errors/429 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.23 - - [28/Aug/2026:10:00:14 +0000] "GET /report HTTP/1.1" 200 429 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.24 - - [28/Aug/2026:10:00:15 +0000] "GET / HTTP/1.1" 200 1234 "https://example.com/429" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.25 - - [28/Aug/2026:10:00:16 +0000] "GET / HTTP/1.1" 200 1234 "-" "429"

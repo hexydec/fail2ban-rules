@@ -1,0 +1,25 @@
+# requests over the configured rate, at a range of excess values
+2026/08/28 10:00:01 [error] 1234#0: *5678 limiting requests, excess: 0.001 by zone "one", client: 203.0.113.10, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:02 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.11, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:03 [error] 1234#0: *5678 limiting requests, excess: 12.345 by zone "one", client: 203.0.113.12, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:04 [error] 1234#0: *5678 limiting requests, excess: 1000.000 by zone "one", client: 203.0.113.13, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# connections over the configured limit, which log no excess value
+2026/08/28 10:00:05 [error] 1234#0: *5678 limiting connections by zone "perserver", client: 203.0.113.14, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:06 [error] 1234#0: *5678 limiting connections by zone "addr", client: 203.0.113.15, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# the zone is whatever the site called it, including one with no name at all
+2026/08/28 10:00:07 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.16, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:08 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "api", client: 203.0.113.17, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:09 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "req_limit_per_ip", client: 203.0.113.18, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:10 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "zone-with-dashes", client: 203.0.113.19, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:11 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "", client: 203.0.113.20, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# the worker and connection numbers vary with the server, and the client may be IPv6
+2026/08/28 10:00:12 [error] 9#0: *1 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.21, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:13 [error] 65535#0: *999999 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.22, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+2026/08/28 10:00:13 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "one", client: 2001:db8::1, server: example.com, request: "GET / HTTP/1.1", host: "example.com"
+
+# the request that tripped the limit is not looked at
+2026/08/28 10:00:14 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.23, server: example.com, request: "POST /api/v1/search HTTP/1.1", host: "example.com"
+2026/08/28 10:00:15 [error] 1234#0: *5678 limiting requests, excess: 0.700 by zone "one", client: 203.0.113.24, server: example.com, request: "GET /img/logo.png HTTP/1.1", host: "example.com"

@@ -1,0 +1,106 @@
+# probes for files and endpoints that do not exist
+203.0.113.10 - - [28/Aug/2026:10:00:01 +0000] "GET /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.11 - - [28/Aug/2026:10:00:02 +0000] "GET /wp-login.php HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.12 - - [28/Aug/2026:10:00:03 +0000] "GET /backup.sql HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.13 - - [28/Aug/2026:10:00:04 +0000] "GET /config.yml HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.14 - - [28/Aug/2026:10:00:05 +0000] "GET /.git/config HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.15 - - [28/Aug/2026:10:00:06 +0000] "GET /.aws/credentials HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.16 - - [28/Aug/2026:10:00:07 +0000] "GET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.17 - - [28/Aug/2026:10:00:08 +0000] "GET /api/v1/users HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.18 - - [28/Aug/2026:10:00:09 +0000] "GET /old-page HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.19 - - [28/Aug/2026:10:00:10 +0000] "GET /some/deep/path/without/an/extension HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.20 - - [28/Aug/2026:10:00:11 +0000] "GET /phpmyadmin/ HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.21 - - [28/Aug/2026:10:00:12 +0000] "GET /cgi-bin/luci HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# an extension that is not on the excluded list, including everyday page extensions
+203.0.113.22 - - [28/Aug/2026:10:00:13 +0000] "GET /index.html HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.23 - - [28/Aug/2026:10:00:14 +0000] "GET /default.htm HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.24 - - [28/Aug/2026:10:00:15 +0000] "GET /login.asp HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.25 - - [28/Aug/2026:10:00:16 +0000] "GET /login.aspx HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.26 - - [28/Aug/2026:10:00:17 +0000] "GET /index.jsp HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.27 - - [28/Aug/2026:10:00:18 +0000] "GET /shell.phtml HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.28 - - [28/Aug/2026:10:00:19 +0000] "GET /data.csv HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.29 - - [28/Aug/2026:10:00:20 +0000] "GET /report.xlsx HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.30 - - [28/Aug/2026:10:00:21 +0000] "GET /archive.zip HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.31 - - [28/Aug/2026:10:00:22 +0000] "GET /db.tar.gz HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.32 - - [28/Aug/2026:10:00:23 +0000] "GET /setup.exe HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.33 - - [28/Aug/2026:10:00:24 +0000] "GET /deploy.sh HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.34 - - [28/Aug/2026:10:00:25 +0000] "GET /app.py HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.35 - - [28/Aug/2026:10:00:26 +0000] "GET /config.rb HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.36 - - [28/Aug/2026:10:00:27 +0000] "GET /phpunit.xsd HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.37 - - [28/Aug/2026:10:00:28 +0000] "GET /.env.bak HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# an excluded extension only counts at the end of the path, not inside it
+203.0.113.38 - - [28/Aug/2026:10:00:29 +0000] "GET /wp-content/uploads/shell.png.php HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.39 - - [28/Aug/2026:10:00:30 +0000] "GET /sitemap.xml.gz.php HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.40 - - [28/Aug/2026:10:00:31 +0000] "GET /img/logo.png/../../etc/passwd HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.41 - - [28/Aug/2026:10:00:32 +0000] "GET /download?file=logo.png HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.42 - - [28/Aug/2026:10:00:33 +0000] "GET /static/app.js/ HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# only the exact well known directory and compressed sitemap are excluded
+203.0.113.43 - - [28/Aug/2026:10:00:34 +0000] "GET /well-known/acme-challenge/6fd8a1b2c3 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.44 - - [28/Aug/2026:10:00:35 +0000] "GET /.well-known-backup/config HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.45 - - [28/Aug/2026:10:00:36 +0000] "GET /etc/sitemap.xml.gz HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.46 - - [28/Aug/2026:10:00:37 +0000] "GET /backup.sql.gz HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.47 - - [28/Aug/2026:10:00:38 +0000] "GET /www.tar.gz HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# every method is counted, as the pattern only requires capitals
+203.0.113.48 - - [28/Aug/2026:10:00:39 +0000] "GET /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.49 - - [28/Aug/2026:10:00:40 +0000] "POST /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.50 - - [28/Aug/2026:10:00:41 +0000] "HEAD /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.51 - - [28/Aug/2026:10:00:42 +0000] "PUT /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.52 - - [28/Aug/2026:10:00:43 +0000] "DELETE /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.53 - - [28/Aug/2026:10:00:44 +0000] "PATCH /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.54 - - [28/Aug/2026:10:00:45 +0000] "OPTIONS /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.55 - - [28/Aug/2026:10:00:46 +0000] "PROPFIND /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# nginx logs the request line verbatim, so HTTP/0.9 arrives with no protocol
+203.0.113.56 - - [28/Aug/2026:10:00:47 +0000] "GET /.env" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.57 - - [28/Aug/2026:10:00:48 +0000] "GET /wp-login.php" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.58 - - [28/Aug/2026:10:00:49 +0000] "GET /backup.sql" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.59 - - [28/Aug/2026:10:00:50 +0000] "GET /test.exe" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# a malformed request line with no path at all, which the trailing star allows for
+203.0.113.60 - - [28/Aug/2026:10:00:51 +0000] "GET " 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# the ban targets whichever client made the request, including over IPv6
+2001:db8::1 - - [28/Aug/2026:10:00:51 +0000] "GET /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2001:db8:85a3::8a2e:370:7334 - - [28/Aug/2026:10:00:51 +0000] "GET /.env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# neither the referer nor the user agent is looked at
+203.0.113.61 - - [28/Aug/2026:10:00:52 +0000] "GET /.env HTTP/1.1" 404 1234 "https://example.com/img/logo.png" "-"
+203.0.113.62 - - [28/Aug/2026:10:00:53 +0000] "GET /.env HTTP/1.1" 404 1234 "https://example.com/" "curl/8.5.0"
+
+# rows taken from real logs, one per distinct request shape, with the client anonymised
+192.0.2.10 - - [08/Sep/2026:08:40:24 +0000] "POST /graphics/flatnuke/forum/index.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.11 - - [08/Sep/2026:08:40:37 +0000] "GET /assets/pages/index.php?mod=read&id=../../../../../../../boot.ini%00 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.12 - - [08/Sep/2026:08:39:46 +0000] "GET /$%7B(111*111)%7D/?lang=nl-nl HTTP/1.1" 404 31 "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
+192.0.2.13 - - [08/Sep/2026:08:39:26 +0000] "GET /css/build/forum.php?cmd=search&word=saint&where=author' HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.14 - - [08/Sep/2026:08:40:03 +0000] "GET /css/sitecake/server/sitecake_entry.php?controller=session&nsextt='\x22--></style></scRipt><scRipt>alert(1)</scRipt> HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.15 - - [08/Sep/2026:08:40:24 +0000] "POST /graphics/modules.php HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.16 - - [08/Sep/2026:08:40:58 +0000] "GET /cgi-bin/awstats.pl?configdir=|id| HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.17 - - [08/Sep/2026:08:28:31 +0000] "GET /hit.php?url_hit=n0nex1st/ HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.18 - - [08/Sep/2026:08:40:38 +0000] "GET /privacy-policy/webapp/jsp/calendar.jsp?enc=iso-8859-1%0d%0a%0d%0aHTTP/1.0%20200%20OK%0d%0aContent-length=12%0d%0a%0d%0a%3Cscript%3Ealert('hi')%3C/script%3E HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.19 - - [08/Sep/2026:08:40:58 +0000] "GET /cgi-bin/extras/quicklist.php?site=../../../../../../../../../../boot.ini%00 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.20 - - [08/Sep/2026:08:40:21 +0000] "GET /partners/industry-partners/webapp/jsp/calendar.jsp?enc=iso-8859-1%0d%0a%0d%0aHTTP/1.0%20200%20OK%0d%0aContent-length=12%0d%0a%0d%0a%3Cscript%3Ealert('hi')%3C/script%3E HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.21 - - [08/Sep/2026:08:40:27 +0000] "GET /graphics/index.php?act=n0nex1st HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.22 - - [08/Sep/2026:08:27:58 +0000] "GET /v1/models/default/versions/1 HTTP/1.1" 404 23 "-" "-"
+192.0.2.23 - - [08/Sep/2026:08:40:55 +0000] "GET /faq/modules/sections/index.php?op=viewarticle&artid=1+1 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.24 - - [08/Sep/2026:08:39:16 +0000] "GET /create-your-case/parser/parser.php?file=/parser/include/default.php%00.gif HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.25 - - [08/Sep/2026:08:40:54 +0000] "GET /check-case-status/gadgets/Blog/BlogModel.php?path=n0nex1st/ HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.26 - - [08/Sep/2026:08:40:09 +0000] "GET /resources-and-support/forum/index.php HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.27 - - [08/Sep/2026:08:40:30 +0000] "GET /partners/login.php HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.28 - - [08/Sep/2026:08:40:32 +0000] "GET /privacy-policy/thumb.php?image=../data/users.csv.php%00.jpg HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.29 - - [08/Sep/2026:08:39:20 +0000] "GET /create-your-case/kb.php?mode=cat&cat=1+1 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.30 - - [08/Sep/2026:08:40:54 +0000] "POST /faq/action.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.31 - - [08/Sep/2026:08:28:30 +0000] "GET /content.asp?ContentId='SQL_ERROR HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.32 - - [08/Sep/2026:08:39:20 +0000] "GET /create-your-case/index.php?action=userinfo&user=1+1 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.33 - - [08/Sep/2026:08:28:30 +0000] "GET /ad_click.asp?banner_id='SQL_INJECTION HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.34 - - [08/Sep/2026:08:38:51 +0000] "GET /scripts/webmail.exe HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.35 - - [08/Sep/2026:08:40:27 +0000] "GET /graphics/include/config_settings.php?config[include_path]=n0nex1st HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.36 - - [08/Sep/2026:08:40:39 +0000] "GET /privacy-policy/c99.php HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.37 - - [08/Sep/2026:08:38:57 +0000] "POST /css/build/modules.php?name=saint HTTP/1.0" 404 146 "-" "-"
+192.0.2.38 - - [08/Sep/2026:08:40:13 +0000] "GET /resources-and-support/index.php?LANGCODE=/../../../../../../boot.ini%00 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.39 - - [30/Mar/2025:19:12:54 +0100] "GET /boost/ HTTP/1.1" 404 14324 "-" "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1; +https://example.com/support/amazonbot) Chrome/119.0.6045.214 Safari/537.36"
+# json and source map probes, which no longer get a pass for their extension
+198.51.100.26 - - [28/Aug/2026:10:00:17 +0000] "GET /js/app.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

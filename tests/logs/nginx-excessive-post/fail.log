@@ -1,0 +1,73 @@
+# every method the filter counts, against an ordinary path
+203.0.113.10 - - [28/Aug/2026:10:00:01 +0000] "POST /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.11 - - [28/Aug/2026:10:00:02 +0000] "PUT /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.12 - - [28/Aug/2026:10:00:03 +0000] "DELETE /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.13 - - [28/Aug/2026:10:00:04 +0000] "PATCH /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# the status is not looked at, so a rejected write counts the same as an accepted one
+203.0.113.14 - - [28/Aug/2026:10:00:05 +0000] "POST /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.15 - - [28/Aug/2026:10:00:06 +0000] "POST /contact HTTP/1.1" 201 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.16 - - [28/Aug/2026:10:00:07 +0000] "POST /contact HTTP/1.1" 204 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.17 - - [28/Aug/2026:10:00:08 +0000] "POST /contact HTTP/1.1" 302 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.18 - - [28/Aug/2026:10:00:09 +0000] "POST /contact HTTP/1.1" 400 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.19 - - [28/Aug/2026:10:00:10 +0000] "POST /contact HTTP/1.1" 403 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.20 - - [28/Aug/2026:10:00:11 +0000] "POST /contact HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.21 - - [28/Aug/2026:10:00:12 +0000] "POST /contact HTTP/1.1" 422 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.22 - - [28/Aug/2026:10:00:13 +0000] "POST /contact HTTP/1.1" 500 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# ordinary writes an application makes, which is what the volume limit is aimed at
+203.0.113.23 - - [28/Aug/2026:10:00:14 +0000] "POST /basket/add HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.24 - - [28/Aug/2026:10:00:15 +0000] "POST /comment HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.25 - - [28/Aug/2026:10:00:16 +0000] "PUT /api/v1/items/9 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.26 - - [28/Aug/2026:10:00:17 +0000] "DELETE /api/v1/items/9 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.27 - - [28/Aug/2026:10:00:18 +0000] "PATCH /api/v1/items/9 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.28 - - [28/Aug/2026:10:00:19 +0000] "POST /search HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.29 - - [28/Aug/2026:10:00:20 +0000] "POST /?ajax=1 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.30 - - [28/Aug/2026:10:00:21 +0000] "POST / HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# the excluded prefixes are case sensitive, so a capitalised admin route is still counted
+203.0.113.31 - - [28/Aug/2026:10:00:22 +0000] "POST /ADMIN/login HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.32 - - [28/Aug/2026:10:00:23 +0000] "POST /Admin/login HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.33 - - [28/Aug/2026:10:00:24 +0000] "POST /WP-ADMIN/admin-ajax.php HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.34 - - [28/Aug/2026:10:00:25 +0000] "POST /TYPO3/index.php HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# the exclusion is pinned to the start of the path, so a nested admin route is counted
+203.0.113.35 - - [28/Aug/2026:10:00:26 +0000] "POST /en/admin/login HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.36 - - [28/Aug/2026:10:00:27 +0000] "POST /site/wp-admin/admin-ajax.php HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.37 - - [28/Aug/2026:10:00:28 +0000] "POST /a/typo3/index.php HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# a request logged with no protocol, and an IPv6 client
+203.0.113.38 - - [28/Aug/2026:10:00:29 +0000] "POST /contact" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2001:db8::1 - - [28/Aug/2026:10:00:29 +0000] "POST /contact HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# rows taken from real logs, one per distinct request shape, with the client anonymised
+192.0.2.10 - - [08/Sep/2026:08:40:31 +0000] "POST /partners/index.php?act=search&process HTTP/1.0" 404 548 "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)"
+192.0.2.11 - - [08/Sep/2026:08:40:31 +0000] "POST /graphics/ajax/api/user/save HTTP/1.0" 301 0 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.12 - - [08/Sep/2026:08:40:04 +0000] "POST /css/calendar.php?show=full_month HTTP/1.0" 404 146 "-" "-"
+192.0.2.13 - - [08/Sep/2026:08:40:17 +0000] "POST /partners/industry-partners/weblibs.pl HTTP/1.0" 404 146 "-" "-"
+192.0.2.14 - - [08/Sep/2026:08:31:05 +0000] "POST /rtehtmlarea/htmlarea/plugins/SpellChecker/spell-check-logic.php?id=1 HTTP/1.0" 404 146 "-" "none"
+192.0.2.15 - - [08/Sep/2026:08:40:53 +0000] "POST /cgi-bin/modules/phpRPC/server.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.16 - - [08/Sep/2026:08:28:25 +0000] "POST /msmq/private$/citrixsmaudeventdata HTTP/1.1" 301 5 "-" "-"
+192.0.2.17 - - [08/Sep/2026:08:40:31 +0000] "POST /partners/index.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.18 - - [08/Sep/2026:08:40:21 +0000] "POST /resources-and-support/login.fcc HTTP/1.0" 404 146 "-" "-"
+192.0.2.19 - - [08/Sep/2026:08:40:04 +0000] "POST /css/users/remind_password.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.20 - - [08/Sep/2026:08:28:32 +0000] "PUT /saintOYDn.txt HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.21 - - [08/Sep/2026:08:40:46 +0000] "POST /?lang=pt-brmodules.php?name=saint HTTP/1.0" 200 41757 "-" "-"
+192.0.2.22 - - [08/Sep/2026:07:55:29 +0000] "POST /%D9%82%D9%85-%D8%A8%D8%B1%D9%81%D8%B9-%D9%82%D8%B6%D9%8A%D8%AA%D9%83/ HTTP/2.0" 422 170 "https://example.com/%D9%82%D9%85-%D8%A8%D8%B1%D9%81%D8%B9-%D9%82%D8%B6%D9%8A%D8%AA%D9%83/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+192.0.2.23 - - [08/Sep/2026:08:39:24 +0000] "POST /css/build/shopproductselect.asp HTTP/1.0" 404 146 "-" "-"
+192.0.2.24 - - [30/Mar/2025:11:16:40 +0100] "POST /account/whisper/reports/ HTTP/2.0" 200 245 "https://example.com/account/whisper/reports/?id=404&reports[id]=45040&utm_medium=email&utm_source=swgfl&utm_campaign=New+Report+Submitted" "Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/135.0.7049.35 Mobile/15E148 Safari/604.1"
+192.0.2.25 - - [08/Sep/2026:08:39:57 +0000] "POST /css/rtehtmlarea/htmlarea/plugins/SpellChecker/spell-check-logic.php?id=1 HTTP/1.0" 404 146 "-" "none"
+192.0.2.26 - - [08/Sep/2026:08:38:39 +0000] "POST /data:image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4Kmodules.php?name=saint HTTP/1.0" 404 146 "-" "-"
+192.0.2.27 - - [19/Jul/2025:09:12:22 +0000] "POST /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.1" 301 162 "-" "Go-http-client/1.1"
+192.0.2.28 - - [08/Sep/2026:08:38:28 +0000] "POST /?lang=ar-sa HTTP/1.1" 200 47434 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.29 - - [08/Sep/2026:07:29:40 +0000] "POST /v1/SubmitFeedback HTTP/1.1" 201 76 "-" "C++/THttpClient"
+192.0.2.30 - - [08/Sep/2026:08:40:01 +0000] "POST /graphics/wave-bottom-darkgrey.svgmodules.php?name=saint HTTP/1.0" 404 146 "-" "-"
+192.0.2.31 - - [08/Sep/2026:08:41:07 +0000] "POST /?lang=ja-jp HTTP/1.1" 200 48023 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.0.2.32 - - [08/Sep/2026:08:40:42 +0000] "POST /assets/pages/fckeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.33 - - [30/Mar/2025:08:51:39 +0100] "POST /login/ HTTP/2.0" 499 0 "https://example.com/login/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0"
+192.0.2.34 - - [08/Sep/2026:08:40:15 +0000] "POST /resources-and-support/check/nettools.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.35 - - [08/Sep/2026:06:59:19 +0000] "POST /%EC%BC%80%EC%9D%B4%EC%8A%A4-%EC%83%81%ED%83%9C-%ED%99%95%EC%9D%B8/ HTTP/2.0" 200 3507 "https://example.com/%EC%BC%80%EC%9D%B4%EC%8A%A4-%EC%83%81%ED%83%9C-%ED%99%95%EC%9D%B8/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Whale/4.39.410.14 Safari/537.36"
+192.0.2.36 - - [08/Sep/2026:08:39:14 +0000] "POST /create-your-case/rtehtmlarea/htmlarea/plugins/SpellChecker/spell-check-logic.php?id=1 HTTP/1.0" 404 146 "-" "none"
+192.0.2.37 - - [08/Sep/2026:08:39:19 +0000] "POST /create-your-case/action.php HTTP/1.0" 404 146 "-" "-"
+192.0.2.38 - - [08/Sep/2026:08:39:16 +0000] "POST /about-us/index.php?act=search&process HTTP/1.0" 404 548 "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)"
+192.0.2.39 - - [08/Sep/2026:08:40:01 +0000] "POST /css/action.php HTTP/1.0" 404 146 "-" "-"

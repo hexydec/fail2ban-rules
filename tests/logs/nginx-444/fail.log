@@ -1,0 +1,7 @@
+# requests the vhost refused with `return 444`, which closes the connection without a response
+203.0.113.10 - - [28/Aug/2026:10:00:01 +0000] "GET /create-account/?location=%2525252Fpage%2525252F3%2525252F HTTP/2.0" 444 0 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 18_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Mobile/15E148 Safari/604.1"
+203.0.113.11 - - [28/Aug/2026:10:00:02 +0000] "GET /@fs/..%252f..%252f..%252fproc/self/environ HTTP/1.1" 444 0 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.12 - - [28/Aug/2026:10:00:03 +0000] "POST /subscribe/?location=%2525252Ftag%2525252Fx HTTP/1.1" 444 0 "-" "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+203.0.113.13 - - [28/Aug/2026:10:00:04 +0000] "HEAD / HTTP/1.1" 444 0 "-" "-"
+# a forged referrer does not change what the status says, so the line still counts
+203.0.113.14 - - [28/Aug/2026:10:00:05 +0000] "GET /create-account/ HTTP/2.0" 444 0 "https://www.google.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"

@@ -87,10 +87,32 @@ describe("nginx-scrapers", () => {
 		}
 	});
 
-	describe("ignores methods outside the listed set", () => {
-		for (const method of ["HEAD", "OPTIONS"]) {
+	// A scraper is a scraper whichever method it uses, and a crawler that only ever sends HEAD is still
+	// reading the site, so the method is not narrowed to the ones that fetch a body
+	describe("matches every method", () => {
+		for (const method of ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE", "PROPFIND"]) {
 			it(method, () => {
-				expectNoMatch(filter, accessLog({method, agent: "curl/8.5.0"}));
+				expectMatch(filter, accessLog({method, agent: "curl/8.5.0"}));
+			});
+		}
+	});
+
+	// A request that got through basic auth came from someone holding a credential, so whatever it
+	// calls itself it is not anonymous scraping. The filter reads the combined format's $remote_user,
+	// which nginx writes as a dash when nobody authenticated
+	describe("ignores a request authenticated with basic auth", () => {
+		const agents = ["curl/8.5.0", "python-requests/2.31.0", "-", "Mozilla/5.0", "Go-http-client/1.1"];
+		for (const agent of agents) {
+			it(agent, () => {
+				expectNoMatch(filter, accessLog({agent, user: "will"}));
+				expectMatch(filter, accessLog({agent}));
+			});
+		}
+
+		// usernames are not restricted to bare words, and none of them may be read as anonymous
+		for (const user of ["a", "user.name", "first last", "-user", "user-", "u-"]) {
+			it(`username ${JSON.stringify(user)}`, () => {
+				expectNoMatch(filter, accessLog({agent: "curl/8.5.0", user}));
 			});
 		}
 	});

@@ -1,0 +1,10 @@
+# every other status, whatever the request asked for
+203.0.113.20 - - [28/Aug/2026:10:00:01 +0000] "GET / HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.21 - - [28/Aug/2026:10:00:02 +0000] "GET /missing HTTP/1.1" 404 162 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.22 - - [28/Aug/2026:10:00:03 +0000] "GET /busy HTTP/1.1" 429 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.23 - - [28/Aug/2026:10:00:04 +0000] "GET /x HTTP/1.1" 400 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+# the status is read from the field after the request, so 444 anywhere else is not a refusal
+203.0.113.24 - - [28/Aug/2026:10:00:05 +0000] "GET /errors/444 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.25 - - [28/Aug/2026:10:00:06 +0000] "GET /a HTTP/1.1" 200 444 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.26 - - [28/Aug/2026:10:00:07 +0000] "GET /b HTTP/1.1" 200 1234 "https://example.com/ 444 " "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+203.0.113.27 - - [28/Aug/2026:10:00:08 +0000] "GET /c HTTP/1.1" 200 1234 "-" "Thing/1.0 444 "
