@@ -7,8 +7,40 @@ The filters are placed in [src/filter.d/](src/filter.d/), copy these files into 
 
 [Example jail configuration is provided](src/jail.conf), *note this is Plesk specific and will require tweaking to your setup*.
 
+## Filters
+Here is a list of the filter provided:
+
+### [nginx-404.conf](src/filter.d/nginx-404.conf)
+Detect `404` statuses, use this to ban IP's that generate many non-existent endpoints in quick succession. This pattern usually happens when malicious actors are probing URL's on your system looking for known weak endpoints, backup files, and other exploitable scripts. 
+
+### [nginx-444.conf](src/filter.d/nginx-444.conf)
+Captures requests that returned a `444` status, which nginx only sends where your own configuration says to. Use it to ban clients your vhost has already refused, so that the decision of what is hostile stays in the site config and this filter only acts on it.
+
+### [nginx-auth.conf](src/filter.d/nginx-auth.conf)
+Detect `401`/`403` status requests, this can be used for detecting brute-force attempts on secure pages or login scripts.
+
+### [nginx-badreqs.conf](src/filter.d/nginx-badreqs.conf)
+Matches specific URL patterns where the request resulted in a `404`. This will capture requests with keywords such as `admin`, `env`, or `backup` which are surrounded by [./_-] characters, e.g. `/.env`, `/wp-content/backup.sql`, or `/aws.yml`.
+
+### [nginx-excessive-post.conf](src/filter.d/nginx-excessive-post.conf)
+Captures requests with `POST`, `PUT`, or `DELETE` methods, use this to limit the number that can be made within a certain period.
+
+### [nginx-excessive-reqs.conf](src/filter.d/nginx-excessive-reqs.conf)
+Match excessive requests logged by nginx rate limiting from your error log to ban those IP's. 
+
+### [nginx-exploit.conf](src/filter.d/nginx-exploit.conf)
+Block URL's containing characters and patterns that clearly indicate an exploit attempt.
+
+### [nginx-limit-reqs.conf](src/filter.d/nginx-limit-reqs.conf)
+Captures requests that returned a `429` status, to ban IP's that keep going over your configured rate limit. 
+
+### [nginx-scrapers.conf](src/filter.d/nginx-scrapers.conf)
+Use this filter to ban user agents that have a generic scraper name such as `PostmanRuntime`, `Go-Http-Client`, `cURL`, or did not provide a User-Agent string at all. If you want to scrape the site, say who you are: anything of your own that hits it should carry its own User-Agent rather than a library default.
+
+Requests that got through HTTP basic auth are skipped.
+
 ## Before you turn these on
-These rules ban real people if your site legitimately serves any of the things they look for. Work through this list on a copy of your own logs before any of it reaches a live jail. Every step below is read-only except the last one.
+These rules ban real people if your site legitimately serves any of the things they look for. Work through this list on a copy of your own logs before any of it reaches a live jail.
 
 ### 1. Check fail2ban sees the visitor, not your proxy
 If nginx sits behind Cloudflare, a load balancer or a Plesk reverse proxy, the first field of your access log is the proxy, and these filters will ban it — taking your whole site off the internet. Confirm the log holds real client addresses:
@@ -26,61 +58,30 @@ Every filter here expects the nginx `combined` format, and `nginx-scrapers` coun
 203.0.113.7 - - [28/Aug/2026:10:00:00 +0000] "GET / HTTP/1.1" 200 1234 "-" "Mozilla/5.0 ..."
 ```
 
-The two dashes after the address are the ident field, which nginx hardcodes, and `$remote_user`, which basic auth fills in. `nginx-scrapers` requires both so that an authenticated request is never banned, so keep them if you build your own format.
-
 `nginx-excessive-reqs` is the exception and reads the nginx **error** log instead.
 
 ### 3. Dry run every filter over your real logs
-`fail2ban-regex` reports what a filter would have caught without banning anybody:
+`fail2ban-regex` reports what a filter would have caught without banning anybody, and prints the log rows it caught:
 
 ```sh
 for f in /etc/fail2ban/filter.d/nginx-*.conf; do
 	echo "== $f"
-	fail2ban-regex /var/www/vhosts/system/example.com/logs/access_log "$f" | tail -3
+	fail2ban-regex --print-all-matched --print-no-missed /var/www/vhosts/system/example.com/logs/access_log "$f"
 done
 ```
 
-Then list the addresses each filter would ban, busiest first:
+Read the rows it prints, not just the totals at the end.
 
-```sh
-fail2ban-regex -o ip /path/to/access_log /etc/fail2ban/filter.d/nginx-badreqs.conf \
-	| sort | uniq -c | sort -rn | head -20
-```
+### 4. Fix what it caught, or report it
+Work through the rows it printed:
 
-### 4. Look up whatever it would ban
-Reverse DNS every address from the step above before you believe the filter is right. A ban list that includes search engines, an uptime monitor, your own office or a payment provider's callback is a configuration problem, not a catch:
+- **Legitimate 404s** — an asset that should be there, or a page that has moved. Restore the file or add a redirect.
+- **Your own requests with a generic user agent** — a monitor, cron job or deploy hook going out as `curl/8.5.0` or `python-requests/2.31.0`, which is what `nginx-scrapers` bans. Give each one a name: `curl -A 'example.com uptime monitor (ops@example.com)'`. The filter stops anonymous bots, not bots.
+- **Legitimate traffic the rules block anyway** — [open an issue](https://github.com/hexydec/fail2ban-rules/issues) with the log line and it becomes a test case.
 
-```sh
-fail2ban-regex -o ip /path/to/access_log /etc/fail2ban/filter.d/nginx-scrapers.conf \
-	| sort -u | while read -r ip; do printf '%s\t%s\n' "$ip" "$(dig +short -x "$ip")"; done
-```
+Then run the dry run again, and see what is left.
 
-### 5. Run your own URLs through the filters
-The keyword list in `nginx-badreqs` holds everyday words — `account`, `index`, `info`, `local`, `test`, `user` — and it only counts them on a 404. A page of yours that gets renamed, or a stale link in an email, will 404 on a keyword and count towards a ban. Turn your own sitemap into log lines and see what matches:
-
-```sh
-curl -s https://example.com/sitemap.xml \
-	| grep -oP '(?<=<loc>)[^<]+' \
-	| sed 's|https\?://[^/]*||' \
-	| while read -r url; do
-		printf '203.0.113.1 - - [01/Jan/2026:00:00:00 +0000] "GET %s HTTP/1.1" 404 1 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"\n' "$url"
-	done > /tmp/mine.log
-fail2ban-regex --print-all-matched --print-no-missed /tmp/mine.log /etc/fail2ban/filter.d/nginx-badreqs.conf
-```
-
-Anything matched is a page of yours that would count against a visitor the day it starts returning 404. Either accept it, or drop that keyword from your copy of the filter.
-
-Do the same for `nginx-exploit`, which does not care about the status code at all. If your own URLs carry `;`, `&&`, `${`, a pipe followed by a word like `cat` or `id`, or anything that reads as an encoded traversal, that filter will ban visitors at the first request. Search your templates and your analytics for those characters before enabling it.
-
-### 6. Set the numbers to your traffic, not to these defaults
-The `maxretry` values in [src/jail.conf](src/jail.conf) suit a small site. Count what a normal day looks like first — if a single visitor legitimately triggers a filter forty times an hour, `maxretry = 10` bans them:
-
-```sh
-fail2ban-regex -o ip /path/to/access_log /etc/fail2ban/filter.d/nginx-404.conf \
-	| sort | uniq -c | sort -rn | awk '$1 > 5'
-```
-
-### 7. Whitelist yourself before the first jail starts
+### 5. Whitelist yourself before the first jail starts
 In `jail.local`, so that a mistake does not lock you out of your own server:
 
 ```ini
@@ -90,24 +91,16 @@ ignoreip = 127.0.0.1/8 ::1 203.0.113.0/24
 
 Include your office, your VPN, your monitoring, and any CI that hits the site.
 
-### 8. Start one jail at a time, with a short ban
-Enable a single filter with `bantime = 60`, leave it a day, and read what it did:
+### 6. Monitor your logs and adjust
+Monitor the bans and identify any legitimate traffic getting blocked.
 
-```sh
-fail2ban-client status nginx-badreqs
-tail -f /var/log/fail2ban.log
-```
-
-Raise `bantime` only once a day's worth of bans all look deserved, and only then add the next jail.
-
-### 9. Keep checking after it is live
-A ban you never hear about is the expensive kind. `fail2ban-client status <jail>` lists currently banned addresses, and the log holds the line that triggered each one:
+`fail2ban-client status <jail>` lists who is currently banned, and the log holds the line that caught each one:
 
 ```sh
 grep 'Ban ' /var/log/fail2ban.log | awk '{print $NF}' | sort | uniq -c | sort -rn
 ```
 
-If a customer reports the site is down for them and fine for everyone else, check that list first.
+If a customer reports the site is down for them and fine for everyone else, check that list first. Loosen `maxretry` or drop a keyword from your copy of the filter where a ban was not deserved, and report the line that caused it as above.
 
 ## Testing
 The filters are covered by a [Vitest](https://vitest.dev) suite that reads each `.conf` file, compiles its `failregex` and `ignoreregex`, and asserts that specific log lines are or are not treated as a failure. It runs automatically on every push and pull request.
@@ -157,35 +150,3 @@ Set `FAIL2BAN_REGEX` to override how the command is found, for example to run it
 ```sh
 FAIL2BAN_REGEX="python3 /opt/fail2ban/bin/fail2ban-regex" npm test
 ```
-
-## Filters
-Here is a list of the filter provided:
-
-### [nginx-404.conf](src/filter.d/nginx-404.conf)
-Detect `404` statuses, use this to ban IP's that generate many non-existent endpoints in quick succession. This pattern usually happens when malicious actors are probing URL's on your system looking for known weak endpoints, backup files, and other exploitable scripts. 
-
-### [nginx-444.conf](src/filter.d/nginx-444.conf)
-Captures requests that returned a `444` status, which nginx only sends where your own configuration says to. Use it to ban clients your vhost has already refused, so that the decision of what is hostile stays in the site config and this filter only acts on it.
-
-### [nginx-auth.conf](src/filter.d/nginx-auth.conf)
-Detect `401`/`403` status requests, this can be used for detecting brute-force attempts on secure pages or login scripts.
-
-### [nginx-badreqs.conf](src/filter.d/nginx-badreqs.conf)
-Matches specific URL patterns where the request resulted in a `404`. This will capture requests with keywords such as `admin`, `env`, or `backup` which are surrounded by [./_-] characters, e.g. `/.env`, `/wp-content/backup.sql`, or `/aws.yml`.
-
-### [nginx-excessive-post.conf](src/filter.d/nginx-excessive-post.conf)
-Captures requests with `POST`, `PUT`, or `DELETE` methods, use this to limit the number that can be made within a certain period.
-
-### [nginx-excessive-reqs.conf](src/filter.d/nginx-excessive-reqs.conf)
-Match excessive requests logged by nginx rate limiting from your error log to ban those IP's. 
-
-### [nginx-exploit.conf](src/filter.d/nginx-exploit.conf)
-Block URL's containing characters and patterns that clearly indicate an exploit attempt.
-
-### [nginx-limit-reqs.conf](src/filter.d/nginx-limit-reqs.conf)
-Captures requests that returned a `429` status, to ban IP's that keep going over your configured rate limit. 
-
-### [nginx-scrapers.conf](src/filter.d/nginx-scrapers.conf)
-Use this filter to ban user agents that have a generic scraper name such as `PostmanRuntime`, `Go-Http-Client`, `cURL`, or did not provide a User-Agent string at all.
-
-Requests that got through HTTP basic auth are skipped, as somebody holding a credential running `curl` against your own API is not anonymous scraping. This is read from `$remote_user`, the second field of the combined format, which nginx writes as a dash when nobody authenticated — so this filter is the one that depends on the field layout, and a custom `log_format` stops it matching anything rather than failing loudly.
