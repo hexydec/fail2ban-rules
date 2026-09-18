@@ -13,7 +13,7 @@
 198.51.100.21 - - [28/Aug/2026:10:00:12 +0000] "GET /News/2026/Summer HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.22 - - [28/Aug/2026:10:00:13 +0000] "GET /Sitemap.xml HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.1 documentation, which is published on purpose by plenty of projects
+# documentation, which is published on purpose by plenty of projects
 198.51.100.23 - - [28/Aug/2026:10:00:14 +0000] "GET /readme.md HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.24 - - [28/Aug/2026:10:00:15 +0000] "GET /README.html HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.25 - - [28/Aug/2026:10:00:16 +0000] "GET /changelog.md HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -22,7 +22,7 @@
 198.51.100.28 - - [28/Aug/2026:10:00:19 +0000] "GET /licence.php HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.29 - - [28/Aug/2026:10:00:20 +0000] "GET /docs/readme.md HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.2 a longer word that merely contains a keyword, which the boundary requirement rules out
+# a longer word that merely contains a keyword, which the boundary requirement rules out
 198.51.100.30 - - [28/Aug/2026:10:00:21 +0000] "GET /administrivia-x HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.31 - - [28/Aug/2026:10:00:22 +0000] "GET /reconfigure HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.32 - - [28/Aug/2026:10:00:23 +0000] "GET /postage HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -30,7 +30,7 @@
 198.51.100.34 - - [28/Aug/2026:10:00:25 +0000] "GET /environmental-policy HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.35 - - [28/Aug/2026:10:00:26 +0000] "GET /testimonials HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.3 a file whose extension is on the shared ignore list is never a probe, keyword or no keyword
+# a file whose extension is on the shared ignore list is never a probe, keyword or no keyword
 198.51.100.36 - - [28/Aug/2026:10:00:27 +0000] "GET /admin.png HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.37 - - [28/Aug/2026:10:00:28 +0000] "GET /img/config.svg HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.38 - - [28/Aug/2026:10:00:29 +0000] "GET /uploads/backup.jpg HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -55,10 +55,10 @@
 198.51.100.64 - - [28/Aug/2026:10:00:55 +0000] "GET /font.ttf HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.65 - - [28/Aug/2026:10:00:56 +0000] "GET /font.otf HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.4 an image requested with no protocol
+# an image requested with no protocol
 198.51.100.66 - - [28/Aug/2026:10:00:57 +0000] "GET /admin.png" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.5 the well known files, all of which legitimate crawlers and browsers request
+# the well known files, all of which legitimate crawlers and browsers request
 198.51.100.67 - - [28/Aug/2026:10:00:58 +0000] "GET /manifest.json HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.68 - - [28/Aug/2026:10:00:59 +0000] "GET /site.webmanifest HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.69 - - [28/Aug/2026:10:01:00 +0000] "GET /ads.txt HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -74,19 +74,19 @@
 198.51.100.79 - - [28/Aug/2026:10:01:10 +0000] "GET /browserconfig.xml HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.80 - - [28/Aug/2026:10:01:11 +0000] "GET /crossdomain.xml HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.6 the same files with a trailing slash or a query string, which the lookahead allows for
+# the same files with a trailing slash or a query string, which the lookahead allows for
 198.51.100.81 - - [28/Aug/2026:10:01:12 +0000] "GET /robots.txt?v=2 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.82 - - [28/Aug/2026:10:01:13 +0000] "GET /manifest.json?v=2 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.83 - - [28/Aug/2026:10:01:14 +0000] "GET /ads.txt/ HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.84 - - [28/Aug/2026:10:01:15 +0000] "GET /sitemap.xml/ HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.7 the well known directory, including the certificate renewal tokens
+# the well known directory, including the certificate renewal tokens
 198.51.100.85 - - [28/Aug/2026:10:01:16 +0000] "GET /.well-known/acme-challenge/6fd8a1b2c3 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.86 - - [28/Aug/2026:10:01:17 +0000] "GET /.well-known/security.txt HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.87 - - [28/Aug/2026:10:01:18 +0000] "GET /.well-known/change-password HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.88 - - [28/Aug/2026:10:01:19 +0000] "GET /.well-known/apple-app-site-association HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.8 a keyword path that actually resolves, which is a real page rather than a probe
+# a keyword path that actually resolves, which is a real page rather than a probe
 198.51.100.89 - - [28/Aug/2026:10:01:20 +0000] "GET /.env HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.90 - - [28/Aug/2026:10:01:21 +0000] "GET /Home/Index HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.91 - - [28/Aug/2026:10:01:22 +0000] "GET /.env HTTP/1.1" 201 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -108,7 +108,7 @@
 198.51.100.107 - - [28/Aug/2026:10:01:38 +0000] "GET /.env HTTP/1.1" 500 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.108 - - [28/Aug/2026:10:01:39 +0000] "GET /Home/Index HTTP/1.1" 500 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
-198.51.100.9 real traffic these filters have to leave alone, taken from the same logs
+# real traffic these filters have to leave alone, taken from the same logs
 192.0.2.10 - - [08/Sep/2026:08:31:08 +0000] "GET /include/footer.inc.php?_AMLconfig[cfg_serverpath]=n0nex1st HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.11 - - [03/Aug/2025:09:05:45 +0000] "GET /wp-includes/css/network.php HTTP/1.1" 301 162 "-" "fasthttp"
 192.0.2.12 - - [03/Aug/2025:09:05:34 +0000] "GET /js.php HTTP/1.1" 301 162 "-" "fasthttp"
@@ -134,3 +134,6 @@
 203.0.113.129 - - [28/Aug/2026:10:02:00 +0000] "GET /site-map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 203.0.113.133 - - [28/Aug/2026:10:02:04 +0000] "GET /blog/2026/08/a-post-that-moved HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.109 - - [08/Sep/2026:08:39:48 +0000] "GET /assets/documents/include/main.php?config[search_disp]=true&include_dir=n0nex1st HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+
+# a backup suffix on a path that holds no keyword, which the word list has nothing to count
+203.0.113.124 - - [28/Aug/2026:10:01:55 +0000] "GET /sitemap.xml.old HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

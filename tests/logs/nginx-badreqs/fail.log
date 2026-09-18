@@ -125,7 +125,6 @@
 203.0.113.121 - - [28/Aug/2026:10:01:52 +0000] "GET /robots.txt.bak HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 203.0.113.122 - - [28/Aug/2026:10:01:53 +0000] "GET /well-known/env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 203.0.113.123 - - [28/Aug/2026:10:01:54 +0000] "GET /.well-known-backup/env HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-203.0.113.124 - - [28/Aug/2026:10:01:55 +0000] "GET /sitemap.xml.old HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 # everyday words are on the keyword list, so a 404 on one of these counts towards a ban
 203.0.113.125 - - [28/Aug/2026:10:01:56 +0000] "GET /user-guide HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
