@@ -26,13 +26,36 @@ describe("nginx-excessive-post", () => {
 		}
 	});
 
-	// This filter counts requests rather than failures, so the response status is irrelevant
-	describe("matches regardless of the response status", () => {
-		for (const status of [200, 201, 204, 302, 400, 403, 404, 500]) {
+	// Only writes the application accepted or processed are counted, including a post-redirect-get
+	describe("matches a status that shows the write was processed", () => {
+		for (const status of [200, 201, 202, 204, 207, 302, 303, 400, 422, 500]) {
 			it(`${status}`, () => {
 				expectMatch(filter, accessLog({method: "POST", path: "/contact", status}));
 			});
 		}
+	});
+
+	// 401, 403, 404 and 429 are counted by nginx-auth, nginx-404 and nginx-limit-reqs, and the rest
+	// show the write was refused or never completed, so none of them are counted here
+	describe("ignores a status another filter counts or that shows the write was refused", () => {
+		for (const status of [203, 205, 206, 301, 304, 307, 308, 401, 403, 404, 405, 413, 429, 444, 499, 502, 503]) {
+			it(`${status}`, () => {
+				expectNoMatch(filter, accessLog({method: "POST", path: "/contact", status}));
+			});
+		}
+	});
+
+	// The status is read after the request line, so a path holding a status-like number is not mistaken for it
+	describe("reads the status rather than a number in the path", () => {
+		it("ignores a 404 to a path ending in 200", () => {
+			expectNoMatch(filter, accessLog({method: "POST", path: "/orders/200", status: 404}));
+		});
+		it("ignores a 404 with no protocol to a path ending in 200", () => {
+			expectNoMatch(filter, accessLog({method: "POST", path: "/orders/ 200", protocol: "", status: 404}));
+		});
+		it("matches a 200 to a path ending in 404", () => {
+			expectMatch(filter, accessLog({method: "POST", path: "/orders/404", status: 200}));
+		});
 	});
 
 	it("matches a POST to the site root", () => {

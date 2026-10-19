@@ -23,7 +23,7 @@ Detect `401`/`403` status requests, this can be used for detecting brute-force a
 Matches specific URL patterns where the request resulted in a `404`. This will capture requests with keywords such as `admin`, `env`, or `backup` which are surrounded by [./_-] characters, e.g. `/.env`, `/wp-content/backup.sql`, or `/aws.yml`.
 
 ### [nginx-excessive-post.conf](src/filter.d/nginx-excessive-post.conf)
-Captures requests with `POST`, `PUT`, or `DELETE` methods, use this to limit the number that can be made within a certain period.
+Captures requests with `POST`, `PUT`, `PATCH`, or `DELETE` methods, use this to limit the number that can be made within a certain period. Only writes the application processed are counted (`200`, `201`, `202`, `204`, `207`, `302`, `303`, `400`, `422`, `500`), as `401`/`403`, `404`, and `429` responses are already counted by the filters for those statuses. Admin areas of the common content management systems, and the WordPress core REST API, are excluded.
 
 ### [nginx-excessive-reqs.conf](src/filter.d/nginx-excessive-reqs.conf)
 Match excessive requests logged by nginx rate limiting from your error log to ban those IP's. 
