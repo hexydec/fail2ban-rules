@@ -75,3 +75,15 @@
 192.0.2.27 - - [08/Sep/2026:08:40:26 +0000] "GET /graphics/pivot/modules/module_db.php?pivot_path=n0nex1st/ HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.28 - - [27/Mar/2024:09:56:59 +0000] "GET /?q=j2%20data&type=web HTTP/1.1" 200 2087 "-" "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 192.0.2.29 - - [08/Sep/2026:08:41:03 +0000] "GET /cgi-bin/ubbthreads.php?Cat=cat&C=' HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+
+# the WordPress core REST API, which the block editor saves and uploads through
+198.51.100.56 - - [28/Aug/2026:10:00:00 +0000] "POST /wp-json/wp/v2/posts/123 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.57 - - [28/Aug/2026:10:00:00 +0000] "POST /wp-json/wp/v2/posts/123/autosaves HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.58 - - [28/Aug/2026:10:00:00 +0000] "PUT /wp-json/wp/v2/pages/45 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.59 - - [28/Aug/2026:10:00:00 +0000] "DELETE /wp-json/wp/v2/media/67?force=true HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.60 - - [28/Aug/2026:10:00:00 +0000] "POST /wp-json/wp/v2/media HTTP/1.1" 201 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.61 - - [28/Aug/2026:10:00:00 +0000] "POST /wp-json/batch/v1 HTTP/1.1" 207 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.62 - - [28/Aug/2026:10:00:00 +0000] "POST /wp-json/batch/v1?_locale=user HTTP/1.1" 207 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.63 - - [28/Aug/2026:10:00:00 +0000] "POST /?rest_route=/wp/v2/posts/123 HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.64 - - [28/Aug/2026:10:00:00 +0000] "POST /index.php?rest_route=%2Fwp%2Fv2%2Fmedia HTTP/1.1" 201 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.65 - - [28/Aug/2026:10:00:00 +0000] "POST /?rest_route=/batch/v1&_locale=user HTTP/1.1" 207 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

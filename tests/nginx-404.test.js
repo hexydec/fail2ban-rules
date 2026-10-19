@@ -63,6 +63,8 @@ describe("nginx-404", () => {
 			"/fonts/inter.otf",
 			"/css/theme.css",
 			"/js/app.js",
+			"/js/app.js.map",
+			"/css/theme.css.map",
 			"/site.webmanifest",
 			"/docs/terms.pdf"
 		];
@@ -229,8 +231,8 @@ describe("nginx-404", () => {
 	});
 
 	// json holds credentials and build manifests far more often than it holds anything a browser asks
-	// for, and a source map hands over the unminified application, so neither gets a pass by extension
-	describe("counts json and source map probes", () => {
+	// for, so it gets no pass by extension
+	describe("counts json probes", () => {
 		const paths = [
 			"/composer.json",
 			"/package.json",
@@ -244,8 +246,7 @@ describe("nginx-404", () => {
 			"/data/site.config.json",
 			"/.vscode/sftp.json",
 			"/static/manifest.json",
-			"/asset-manifest.json",
-			"/js/app.js.map"
+			"/asset-manifest.json"
 		];
 		for (const path of paths) {
 			it(path, () => {

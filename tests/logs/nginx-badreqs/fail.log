@@ -173,8 +173,7 @@
 192.0.2.37 - - [08/Sep/2026:08:39:16 +0000] "POST /about-us/flatnuke/forum/index.php HTTP/1.0" 404 146 "-" "-"
 192.0.2.38 - - [08/Sep/2026:08:40:40 +0000] "GET /assets/pages/index.php?tim=' HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.39 - - [08/Sep/2026:08:40:29 +0000] "GET /javascript/build/admin.php?act=comments&orderType=<script>alert('SAINT')</script> HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
-# json and source map probes, which no longer get a pass for their extension
-198.51.100.45 - - [28/Aug/2026:10:00:36 +0000] "GET /app.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+# json probes, which get no pass for their extension
 198.51.100.46 - - [28/Aug/2026:10:00:37 +0000] "GET /config.json HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.50 - - [28/Aug/2026:10:00:41 +0000] "GET /composer.json HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 198.51.100.51 - - [28/Aug/2026:10:00:42 +0000] "GET /package.json HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

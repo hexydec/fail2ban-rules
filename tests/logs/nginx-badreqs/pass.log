@@ -137,3 +137,9 @@
 
 # a backup suffix on a path that holds no keyword, which the word list has nothing to count
 203.0.113.124 - - [28/Aug/2026:10:01:55 +0000] "GET /sitemap.xml.old HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# source maps, which a browser asks for whenever its developer tools are open
+198.51.100.45 - - [28/Aug/2026:10:00:00 +0000] "GET /js/app.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.46 - - [28/Aug/2026:10:00:00 +0000] "GET /css/theme.css.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.50 - - [28/Aug/2026:10:00:00 +0000] "GET /wp-includes/js/dist/block-editor.min.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.51 - - [28/Aug/2026:10:00:00 +0000] "GET /wp-content/plugins/example/build/index.js.map?ver=1.2.3 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

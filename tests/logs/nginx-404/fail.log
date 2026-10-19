@@ -102,5 +102,3 @@
 192.0.2.37 - - [08/Sep/2026:08:38:57 +0000] "POST /css/build/modules.php?name=saint HTTP/1.0" 404 146 "-" "-"
 192.0.2.38 - - [08/Sep/2026:08:40:13 +0000] "GET /resources-and-support/index.php?LANGCODE=/../../../../../../boot.ini%00 HTTP/1.0" 404 146 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.39 - - [30/Mar/2025:19:12:54 +0100] "GET /boost/ HTTP/1.1" 404 14324 "-" "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1; +https://example.com/support/amazonbot) Chrome/119.0.6045.214 Safari/537.36"
-# json and source map probes, which no longer get a pass for their extension
-198.51.100.26 - - [28/Aug/2026:10:00:17 +0000] "GET /js/app.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

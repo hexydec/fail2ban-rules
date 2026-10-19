@@ -115,3 +115,9 @@
 192.0.2.27 - - [08/Sep/2026:08:40:53 +0000] "GET /?lang=x'),NULL,NULL,NULL,NULL,NULL,NULL)%20waitfor%20delay%20'00:00:15'%20/* HTTP/1.1" 200 41757 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.28 - - [08/Sep/2026:08:40:52 +0000] "GET /?lang=1),NULL,NULL,NULL,NULL,NULL)%20waitfor%20delay%20'00:00:15'%20/* HTTP/1.1" 200 41757 "-" "Mozilla/5.0; (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.0.2.29 - - [20/Jul/2025:17:05:44 +0000] "GET /index/function.php/img/ HTTP/1.1" 301 162 "-" "-"
+
+# source maps, which a browser asks for whenever its developer tools are open
+198.51.100.26 - - [28/Aug/2026:10:00:00 +0000] "GET /js/app.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.89 - - [28/Aug/2026:10:00:00 +0000] "GET /css/theme.css.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.90 - - [28/Aug/2026:10:00:00 +0000] "GET /wp-includes/js/dist/block-editor.min.js.map HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+198.51.100.91 - - [28/Aug/2026:10:00:00 +0000] "GET /wp-content/plugins/example/build/index.js.map?ver=1.2.3 HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
